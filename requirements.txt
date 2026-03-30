@@ -1,0 +1,16 @@
+torch
+torchvision
+torchaudio
+numpy
+pandas
+tqdm
+librosa
+decord
+scipy
+torchlibrosa
+psutil
+scikit-learn
+seaborn
+matplotlib
+dtk 
+opencv-python
