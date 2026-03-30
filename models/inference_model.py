@@ -17,8 +17,7 @@ FUSION_MAP = {
 class DynamicFFIAModelOneSwitch(nn.Module):
     """
     One-switch inference model.
-    Gate decides → only ONE expert runs per sample (grouped for efficiency).
-    Fully compatible with training model weights.
+    Gate decides -> only ONE expert runs per sample.Ư
     """
     def __init__(self, num_classes=4, fusion_type=None):
         super().__init__()
