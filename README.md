@@ -4,8 +4,6 @@ The first dynamic gated expert-selection framework specifically designed for FFI
 
 ## Dataset
 The dataset used in this project is **U-FFIA**.  
-You can download it from Kaggle:
-https://www.kaggle.com/datasets/ducminhphy/u-ffia-1
 
 ## Features
 - Supports **2-branch** (Audio + Video only) and **3-branch** with 4 fusion experts (Cross Attention, Simple Cross Attention, MBT, Self Attention).
