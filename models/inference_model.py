@@ -15,17 +15,12 @@ FUSION_MAP = {
 }
 
 class DynamicFFIAModelOneSwitch(nn.Module):
-    """
-    One-switch inference model.
-    Gate decides -> only ONE expert runs per sample.
-    """
     def __init__(self, num_classes=4, fusion_type=None):
         super().__init__()
         self.num_classes = num_classes
         self.fusion_type = fusion_type
         self.num_experts = 2 if fusion_type is None else 3
 
-        # Shared components (same names as training model)
         self.audio_frontend = Audio_Frontend(**CONFIG['audio_cfg'], training=False)
         self.audio_backbone = MobileNetV2_Head(output_dim=1024)
         self.video_backbone = S3D_Head(output_dim=1024)
@@ -36,15 +31,14 @@ class DynamicFFIAModelOneSwitch(nn.Module):
         self.head_video = nn.Sequential(nn.AdaptiveAvgPool1d(1), nn.Flatten(), nn.Linear(512, num_classes))
 
         if fusion_type is not None:
-            self.fusion_module = FUSION_MAP[fusion_type](embed_dim=512)   # same name as training
+            self.fusion_module = FUSION_MAP[fusion_type](embed_dim=512)   
             self.head_fusion = nn.Linear(512, num_classes)
 
         self.gate = LightweightCNN_Gate(num_experts=self.num_experts, feature_dim=128)
 
     def forward(self, audio_raw, video_raw):
-        """Gate decides → only ONE expert runs per sample (grouped)"""
         with torch.no_grad():
-            spec = self.audio_frontend(audio_raw)                  # shared
+            spec = self.audio_frontend(audio_raw)                  
             gate_logits = self.gate(spec, video_raw)
             chosen = torch.argmax(gate_logits, dim=1)              # (B,)
 

@@ -22,12 +22,11 @@ FLOP_WEIGHTS = {
 }
 
 class DynamicFFIAModel(nn.Module):
-    def __init__(self, num_classes=4, tau=1.0, hard_gate=False, fusion_type=None, training=False):
+    def __init__(self, num_classes=4, tau=1.0, fusion_type=None, training=False):
         super().__init__()
         self.fusion_type = fusion_type
         self.num_classes = num_classes
         self.tau = tau
-        self.hard_gate = hard_gate
         self.num_experts = 2 if fusion_type is None else 3
 
         # Backbones
@@ -95,7 +94,7 @@ class DynamicFFIAModel(nn.Module):
             preds = torch.stack([pred_a, pred_v, pred_f], dim=1)
 
         gate_logits = self.gate(spec, video_raw)
-        weights = DiffSoftmax(gate_logits, tau=self.tau, hard=self.hard_gate, dim=1)
+        weights = DiffSoftmax(gate_logits, tau=self.tau, dim=1)
 
         if self.store_weight:
             self.weight_list.append(weights.detach().cpu())
