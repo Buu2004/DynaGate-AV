@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from .backbones import Audio_Frontend, MobileNetV2_Head, S3D_Head
 from .fusions import CrossAttn_Fusion, SelfAttn_Fusion, Simple_CrossAttn_Fusion, MBT_Fusion
-from .gate import LightweightCNN_Gate, DiffSoftmax
+from .gate import LightweightCNN_Gate, LightweightTransformer_Gate, LightweightMLP_Gate, DiffSoftmax
 from config import CONFIG
 
 FUSION_MAP = {
