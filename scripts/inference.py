@@ -8,7 +8,7 @@ import seaborn as sns
 from sklearn.metrics import accuracy_score, confusion_matrix
 from tqdm import tqdm
 from config import CONFIG
-from models.inference_model import DynamicFFIAModelOneSwitch
+from models.inference_model import DynamicFFIAModel
 from data.dataset import get_dataloader   
 
 def run_inference(model, loader, device, fusion_type):
@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
     fusion_type = None if args.fusion_type == 'none' else args.fusion_type
 
-    model = DynamicFFIAModelOneSwitch(num_classes=CONFIG['num_classes'], fusion_type=fusion_type)
+    model = DynamicFFIAModel(num_classes=CONFIG['num_classes'], fusion_type=fusion_type)
     model.load_state_dict(torch.load(args.model_path, map_location=args.device))
     print(f"Loaded model: {args.model_path}")
 

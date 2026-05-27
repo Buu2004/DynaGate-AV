@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from .backbones import Audio_Frontend, MobileNetV2_Head, S3D_Head
-from .fusions import CrossAttn_Fusion, SelfAttn_Fusion, Simple_CrossAttn_Fusion, MBT_Fusion
+from .fusions import CrossAttn_Fusion, SelfAttn_Fusion, MBT_Fusion
 from .gate import LightweightCNN_Gate, LightweightTransformer_Gate, LightweightMLP_Gate
 from config import CONFIG
 
@@ -10,11 +10,10 @@ FUSION_MAP = {
     None: None,  # 2-branch
     'cross_attn': CrossAttn_Fusion,
     'self_attn': SelfAttn_Fusion,
-    'simple_cross': Simple_CrossAttn_Fusion,
     'mbt': MBT_Fusion,
 }
 
-class DynamicFFIAModelOneSwitch(nn.Module):
+class DynamicFFIAModel(nn.Module):
     def __init__(self, num_classes=4, fusion_type=None):
         super().__init__()
         self.num_classes = num_classes
