@@ -146,5 +146,3 @@ if __name__ == "__main__":
     print(f"   Acc = {log[best_idx, 0]:.4f} | FLOP = {log[best_idx, 2]:.2e}")
     print(f"   R1 = {log[best_idx, 3]:.3f} | R2 = {log[best_idx, 4]:.3f}" +
           (f" | R3 = {log[best_idx, 5]:.3f}" if is_three_branch else ""))
-
-    print(f"\nAll models and logs saved. Training finished successfully!")

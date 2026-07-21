@@ -16,6 +16,14 @@ if __name__ == "__main__":
     parser.add_argument('--n_runs', type=int, default=CONFIG['n_runs'])
     parser.add_argument('--epochs', type=int, default=CONFIG['n_epochs'])
     parser.add_argument('--batch_size', type=int, default=CONFIG['batch_size'])
+    parser.add_argument('--mode', type=str, default='max', choices=['max', 'min'])
+    parser.add_argument('--factor', type=float, default=1.5)
+    parser.add_argument('--patience', type=int, default=2)
+    parser.add_argument('--threshold', type=float, default=1e-2)
+    parser.add_argument('--threshold_mode', type=str, default='rel', choices=['rel', 'abs'])
+    parser.add_argument('--min_reg', type=float, default=0.00001)
+    parser.add_argument('--max_reg', type=float, default=0.003)
+    parser.add_argument('--no-verbose', dest='verbose', action='store_false', default=True)
     args = parser.parse_args()
 
     CONFIG['n_runs'] = args.n_runs
@@ -64,14 +72,14 @@ if __name__ == "__main__":
 
         reg_scheduler = IncreaseRegOnPlateau(
             reg=CONFIG['reg'],
-            mode='max',
-            factor=1.5,
-            patience=2,
-            threshold=1e-2,
-            threshold_mode='rel',
-            min_reg=0.00001,
-            max_reg=0.003,
-            verbose=True
+            mode=args.mode,
+            factor=args.factor,
+            patience=args.patience,
+            threshold=args.threshold,
+            threshold_mode=args.threshold_mode,
+            min_reg=args.min_reg,
+            max_reg=args.max_reg,
+            verbose=args.verbose
         )
 
         best_val_loss = float('inf')
@@ -127,5 +135,3 @@ if __name__ == "__main__":
     print(f"   Acc = {log[best_idx, 0]:.4f} | FLOP = {log[best_idx, 2]:.2e}")
     print(f"   R1 = {log[best_idx, 3]:.3f} | R2 = {log[best_idx, 4]:.3f}" +
           (f" | R3 = {log[best_idx, 5]:.3f}" if is_three_branch else ""))
-
-    print(f"\nAll models and logs saved. Training finished successfully!")
