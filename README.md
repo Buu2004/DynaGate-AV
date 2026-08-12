@@ -3,7 +3,7 @@
 The first dynamic gated expert-selection framework specifically designed for FFIA in aquaculture.
 
 ## Dataset
-The dataset used in this project is [U-FFIA](https://zenodo.org/records/11059975)
+The dataset used in this project is [AV-FFIA](https://zenodo.org/records/11059975)
 
 ## Features
 - Supports **2-branch** (Audio + Video only) and **3-branch** with 4 fusion experts (Cross Attention, Simple Cross Attention, MBT, Self Attention).
