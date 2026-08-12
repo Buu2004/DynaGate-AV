@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="DynaGate-FFIA: Dynamic Audio-Visual Routing for Efficient Fish Feeding Assessment"
+    >
+
+    <title>DynaGate-FFIA</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav class="navbar">
+    <div class="container nav-inner">
+
+        <a href="#top" class="nav-logo">
+            DynaGate-FFIA
+        </a>
+
+        <div class="nav-links">
+            <a href="#abstract">Abstract</a>
+            <a href="#method">Method</a>
+            <a href="#results">Results</a>
+            <a href="#robustness">Robustness</a>
+            <a href="#citation">Citation</a>
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<main id="top">
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-badge">
+            AUDIO-VISUAL · DYNAMIC ROUTING · AQUACULTURE
+        </div>
+
+        <h1>
+            DynaGate-FFIA
+        </h1>
+
+        <p class="hero-title">
+            Dynamic Audio-Visual Routing for Efficient
+            Fish Feeding Assessment
+        </p>
+
+        <p class="hero-description">
+            A lightweight dynamic routing framework that
+            adaptively selects audio, video, or fusion experts
+            for efficient and robust fish feeding intensity
+            assessment.
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <!-- Replace YOUR_USERNAME and YOUR_REPO -->
+            <a
+                class="button button-primary"
+                href="https://github.com/YOUR_USERNAME/YOUR_REPO"
+                target="_blank"
+            >
+                View Code
+            </a>
+
+            <a
+                class="button button-secondary"
+                href="assets/DynaGate-FFIA.pdf"
+                target="_blank"
+            >
+                Read Paper
+            </a>
+
+        </div>
+
+
+        <!-- Key numbers -->
+
+        <div class="metric-grid">
+
+            <div class="metric-card">
+                <div class="metric-number">
+                    96.4%
+                </div>
+
+                <div class="metric-label">
+                    Test Accuracy
+                </div>
+            </div>
+
+
+            <div class="metric-card">
+                <div class="metric-number">
+                    5.19
+                </div>
+
+                <div class="metric-label">
+                    GFLOPs
+                </div>
+            </div>
+
+
+            <div class="metric-card">
+                <div class="metric-number">
+                    79%
+                </div>
+
+                <div class="metric-label">
+                    Audio Routing
+                </div>
+            </div>
+
+
+            <div class="metric-card">
+                <div class="metric-number">
+                    21%
+                </div>
+
+                <div class="metric-label">
+                    Video Routing
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Architecture teaser -->
+
+        <div class="architecture-card">
+
+            <div class="section-label">
+                OVERVIEW
+            </div>
+
+            <h2>
+                Dynamic computation,
+                selected per sample.
+            </h2>
+
+            <div class="architecture">
+
+                <div class="input-column">
+
+                    <div class="arch-box audio-box">
+                        <span>Audio</span>
+                        <small>Mel Spectrogram</small>
+                    </div>
+
+                    <div class="arch-box video-box">
+                        <span>Video</span>
+                        <small>20 Frames</small>
+                    </div>
+
+                </div>
+
+
+                <div class="arch-arrow">
+                    →
+                </div>
+
+
+                <div class="gate-box">
+
+                    <strong>
+                        Lightweight CNN Gate
+                    </strong>
+
+                    <span>
+                        Audio + Video
+                    </span>
+
+                    <small>
+                        ~0.2M parameters
+                    </small>
+
+                </div>
+
+
+                <div class="arch-arrow">
+                    →
+                </div>
+
+
+                <div class="expert-column">
+
+                    <div class="expert-box">
+                        Audio Expert
+                    </div>
+
+                    <div class="expert-box">
+                        Video Expert
+                    </div>
+
+                    <div class="expert-box fusion">
+                        Fusion Expert
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <p class="figure-caption">
+                The gate analyzes both modalities and
+                dynamically selects the appropriate expert.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ABSTRACT
+========================================================= -->
+
+<section id="abstract" class="section">
+
+    <div class="container narrow">
+
+        <div class="section-label">
+            ABSTRACT
+        </div>
+
+        <h2>
+            Efficient fish feeding assessment
+            for real-world aquaculture.
+        </h2>
+
+        <p>
+            Fish feeding intensity assessment (FFIA) is important
+            for efficient aquaculture management, but existing
+            audio-visual systems can be computationally expensive
+            because they process all modalities for every input.
+        </p>
+
+        <p>
+            DynaGate-FFIA addresses this problem with a lightweight
+            gating mechanism that dynamically routes each sample
+            to an appropriate expert. The model combines acoustic
+            and visual information while avoiding unnecessary
+            computation whenever a cheaper modality is sufficient.
+        </p>
+
+        <p>
+            On the AV-FFIA benchmark, DynaGate-Light reaches
+            <strong>96.4% test accuracy</strong> using only
+            <strong>5.19 GFLOPs</strong>.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     MOTIVATION
+========================================================= -->
+
+<section class="section section-light">
+
+    <div class="container">
+
+        <div class="section-label">
+            MOTIVATION
+        </div>
+
+        <h2>
+            Why not use expensive multimodal fusion
+            for every sample?
+        </h2>
+
+        <div class="three-column-grid">
+
+            <div class="info-card">
+
+                <div class="info-number">
+                    01
+                </div>
+
+                <h3>
+                    Audio
+                </h3>
+
+                <p>
+                    Feeding sounds can provide useful information
+                    even when visual conditions are poor.
+                </p>
+
+                <div class="tag-list">
+                    <span>Pump noise</span>
+                    <span>Bubble noise</span>
+                    <span>Water flow</span>
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-number">
+                    02
+                </div>
+
+                <h3>
+                    Video
+                </h3>
+
+                <p>
+                    Visual observations reveal fish aggregation
+                    and surface activity.
+                </p>
+
+                <div class="tag-list">
+                    <span>Low light</span>
+                    <span>Turbidity</span>
+                    <span>Occlusion</span>
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-number">
+                    03
+                </div>
+
+                <h3>
+                    Static Fusion
+                </h3>
+
+                <p>
+                    Static multimodal models execute expensive
+                    computation even when one modality is already
+                    sufficient.
+                </p>
+
+                <div class="tag-list">
+                    <span>High compute</span>
+                    <span>Fixed pipeline</span>
+                    <span>Noise-sensitive</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="big-statement">
+
+            <span>
+                The key idea:
+            </span>
+
+            <strong>
+                the best modality can depend on the input.
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     METHOD
+========================================================= -->
+
+<section id="method" class="section">
+
+    <div class="container">
+
+        <div class="section-label">
+            METHOD
+        </div>
+
+        <h2>
+            A lightweight gate controls
+            multimodal computation.
+        </h2>
+
+
+        <!-- Audio -->
+
+        <div class="method-row">
+
+            <div class="method-text">
+
+                <div class="method-number">
+                    01
+                </div>
+
+                <h3>
+                    Audio branch
+                </h3>
+
+                <p>
+                    Raw audio is converted into a log-Mel
+                    spectrogram and processed by a MobileNetV2
+                    backbone.
+                </p>
+
+                <code>
+                    Audio_Frontend → MobileNetV2_Head
+                </code>
+
+            </div>
+
+            <div class="pipeline">
+
+                <div>Raw waveform</div>
+                <span>↓</span>
+                <div>Log-Mel spectrogram</div>
+                <span>↓</span>
+                <div>MobileNetV2</div>
+                <span>↓</span>
+                <div>512-d feature</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Video -->
+
+        <div class="method-row reverse">
+
+            <div class="method-text">
+
+                <div class="method-number">
+                    02
+                </div>
+
+                <h3>
+                    Video branch
+                </h3>
+
+                <p>
+                    Video clips are sampled into 20 frames and
+                    processed using an S3D backbone.
+                </p>
+
+                <code>
+                    video frames → S3D_Head
+                </code>
+
+            </div>
+
+            <div class="pipeline">
+
+                <div>20 video frames</div>
+                <span>↓</span>
+                <div>S3D backbone</div>
+                <span>↓</span>
+                <div>512-d feature</div>
+                <span>↓</span>
+                <div>Video expert</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Gate -->
+
+        <div class="method-row">
+
+            <div class="method-text">
+
+                <div class="method-number">
+                    03
+                </div>
+
+                <h3>
+                    Lightweight CNN Gate
+                </h3>
+
+                <p>
+                    The gate receives the audio spectrogram and
+                    temporally averaged video information. Their
+                    embeddings are concatenated and transformed
+                    into expert-selection logits.
+                </p>
+
+                <code>
+                    LightweightCNN_Gate
+                </code>
+
+            </div>
+
+            <div class="gate-visual">
+
+                <div class="gate-input">
+                    Audio
+                </div>
+
+                <div class="plus">
+                    +
+                </div>
+
+                <div class="gate-input">
+                    Video
+                </div>
+
+                <div class="gate-main">
+                    Gate
+                </div>
+
+                <div class="gate-output">
+                    Audio / Video / Fusion
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Fusion -->
+
+        <div class="method-row reverse">
+
+            <div class="method-text">
+
+                <div class="method-number">
+                    04
+                </div>
+
+                <h3>
+                    Optional fusion expert
+                </h3>
+
+                <p>
+                    Three-branch variants add an explicit fusion
+                    expert using cross-attention, self-attention,
+                    simple cross-attention, or MBT.
+                </p>
+
+            </div>
+
+            <div class="fusion-grid">
+
+                <div>
+                    Cross Attention
+                </div>
+
+                <div>
+                    Self Attention
+                </div>
+
+                <div>
+                    Simple Cross
+                </div>
+
+                <div>
+                    MBT
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     TRAINING / INFERENCE
+========================================================= -->
+
+<section class="section section-dark">
+
+    <div class="container">
+
+        <div class="section-label">
+            TRAINING &amp; INFERENCE
+        </div>
+
+        <h2>
+            Soft routing for learning.
+            Hard routing for deployment.
+        </h2>
+
+
+        <div class="compare-grid">
+
+            <div class="compare-card">
+
+                <div class="compare-title">
+                    TRAINING
+                </div>
+
+                <div class="flow">
+
+                    <div>
+                        Gate
+                    </div>
+
+                    <span>↓</span>
+
+                    <div>
+                        Differentiable
+                        soft routing
+                    </div>
+
+                    <span>↓</span>
+
+                    <div class="flow-row">
+
+                        <span>Audio</span>
+                        <span>Video</span>
+                        <span>Fusion</span>
+
+                    </div>
+
+                    <span>↓</span>
+
+                    <div>
+                        CE + FLOPs
+                        regularization
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="compare-card">
+
+                <div class="compare-title">
+                    INFERENCE
+                </div>
+
+                <div class="flow">
+
+                    <div>
+                        Gate
+                    </div>
+
+                    <span>↓</span>
+
+                    <div>
+                        Argmax
+                    </div>
+
+                    <span>↓</span>
+
+                    <div class="selected-expert">
+                        One selected expert
+                    </div>
+
+                    <span>↓</span>
+
+                    <div>
+                        Prediction
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="code-reference">
+
+            <p>
+                Implementation:
+            </p>
+
+            <code>
+                models/dynamic/ffia.py
+            </code>
+
+            <code>
+                models/inference/inference_model.py
+            </code>
+
+            <code>
+                models/gate.py
+            </code>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     RESULTS
+========================================================= -->
+
+<section id="results" class="section">
+
+    <div class="container">
+
+        <div class="section-label">
+            RESULTS
+        </div>
+
+        <h2>
+            Higher accuracy with dramatically
+            lower computation.
+        </h2>
+
+
+        <div class="result-highlight">
+
+            <div>
+
+                <div class="result-big">
+                    96.4%
+                </div>
+
+                <div class="result-small">
+                    DynaGate-Light
+                </div>
+
+            </div>
+
+            <div class="result-vs">
+                vs.
+            </div>
+
+            <div>
+
+                <div class="result-big muted">
+                    92.4%
+                </div>
+
+                <div class="result-small">
+                    Cross-Attention
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CSS bar chart -->
+
+        <div class="chart-card">
+
+            <h3>
+                Test Accuracy
+            </h3>
+
+
+            <div class="bar-row">
+
+                <span>
+                    MobileNetV2
+                </span>
+
+                <div class="bar-track">
+                    <div
+                        class="bar"
+                        style="width:83.6%"
+                    ></div>
+                </div>
+
+                <strong>
+                    83.6%
+                </strong>
+
+            </div>
+
+
+            <div class="bar-row">
+
+                <span>
+                    S3D
+                </span>
+
+                <div class="bar-track">
+                    <div
+                        class="bar"
+                        style="width:82.7%"
+                    ></div>
+                </div>
+
+                <strong>
+                    82.7%
+                </strong>
+
+            </div>
+
+
+            <div class="bar-row">
+
+                <span>
+                    Self-Attention
+                </span>
+
+                <div class="bar-track">
+                    <div
+                        class="bar"
+                        style="width:89.2%"
+                    ></div>
+                </div>
+
+                <strong>
+                    89.2%
+                </strong>
+
+            </div>
+
+
+            <div class="bar-row">
+
+                <span>
+                    MBT
+                </span>
+
+                <div class="bar-track">
+                    <div
+                        class="bar"
+                        style="width:74%"
+                    ></div>
+                </div>
+
+                <strong>
+                    74.0%
+                </strong>
+
+            </div>
+
+
+            <div class="bar-row">
+
+                <span>
+                    Cross-Attention
+                </span>
+
+                <div class="bar-track">
+                    <div
+                        class="bar"
+                        style="width:92.4%"
+                    ></div>
+                </div>
+
+                <strong>
+                    92.4%
+                </strong>
+
+            </div>
+
+
+            <div class="bar-row highlight-bar">
+
+                <span>
+                    DynaGate-Light
+                </span>
+
+                <div class="bar-track">
+                    <div
+                        class="bar"
+                        style="width:96.4%"
+                    ></div>
+                </div>
+
+                <strong>
+                    96.4%
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- Efficiency -->
+
+        <div class="efficiency-card">
+
+            <div>
+
+                <div class="section-label">
+                    COMPUTATIONAL EFFICIENCY
+                </div>
+
+                <h3>
+                    5.19 GFLOPs
+                </h3>
+
+                <p>
+                    DynaGate-Light uses a fraction of the computation
+                    required by the strongest static fusion baseline.
+                </p>
+
+            </div>
+
+
+            <div class="efficiency-bars">
+
+                <div class="eff-row">
+
+                    <span>
+                        DynaGate-Light
+                    </span>
+
+                    <div class="eff-track">
+                        <div
+                            class="eff-fill dynagate"
+                            style="width:8.5%"
+                        ></div>
+                    </div>
+
+                    <strong>
+                        5.19
+                    </strong>
+
+                </div>
+
+
+                <div class="eff-row">
+
+                    <span>
+                        Cross-Attention
+                    </span>
+
+                    <div class="eff-track">
+                        <div
+                            class="eff-fill"
+                            style="width:100%"
+                        ></div>
+                    </div>
+
+                    <strong>
+                        60.93
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Expert usage -->
+
+        <div class="routing-card">
+
+            <div>
+
+                <div class="section-label">
+                    EXPERT USAGE
+                </div>
+
+                <h3>
+                    Most samples can be handled
+                    by the cheaper audio expert.
+                </h3>
+
+                <p>
+                    The reported routing distribution is
+                    approximately 79% audio and 21% video
+                    for the two-branch model.
+                </p>
+
+            </div>
+
+
+            <div class="donut-wrapper">
+
+                <div class="donut">
+
+                    <div class="donut-center">
+                        79/21
+                    </div>
+
+                </div>
+
+                <div class="donut-legend">
+
+                    <span>
+                        <i class="dot audio"></i>
+                        Audio · 79%
+                    </span>
+
+                    <span>
+                        <i class="dot video"></i>
+                        Video · 21%
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ABLATION
+========================================================= -->
+
+<section class="section section-light">
+
+    <div class="container">
+
+        <div class="section-label">
+            ABLATION
+        </div>
+
+        <h2>
+            What makes the gate effective?
+        </h2>
+
+
+        <div class="ablation-grid">
+
+            <div class="ablation-card">
+
+                <h3>
+                    Gate Architecture
+                </h3>
+
+                <div class="ablation-item">
+
+                    <span>
+                        CNN Gate
+                    </span>
+
+                    <strong>
+                        96.4%
+                    </strong>
+
+                </div>
+
+                <div class="ablation-item">
+
+                    <span>
+                        Transformer Gate
+                    </span>
+
+                    <strong>
+                        96.2%
+                    </strong>
+
+                </div>
+
+                <div class="ablation-item">
+
+                    <span>
+                        MLP Gate
+                    </span>
+
+                    <strong>
+                        85.3%
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="ablation-card">
+
+                <h3>
+                    Number of Experts
+                </h3>
+
+                <div class="ablation-item">
+
+                    <span>
+                        Audio + Video
+                    </span>
+
+                    <strong>
+                        96.4%
+                    </strong>
+
+                </div>
+
+                <div class="ablation-item">
+
+                    <span>
+                        + Self-Attention
+                    </span>
+
+                    <strong>
+                        96.1%
+                    </strong>
+
+                </div>
+
+                <div class="ablation-item">
+
+                    <span>
+                        + Cross-Attention
+                    </span>
+
+                    <strong>
+                        96.5%
+                    </strong>
+
+                </div>
+
+                <div class="ablation-item">
+
+                    <span>
+                        + MBT
+                    </span>
+
+                    <strong>
+                        96.3%
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="insight-box">
+
+            <div class="insight-icon">
+                !
+            </div>
+
+            <div>
+
+                <strong>
+                    Key insight
+                </strong>
+
+                <p>
+                    Adding a third fusion branch provides only
+                    a marginal accuracy improvement while increasing
+                    computational cost.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ROBUSTNESS
+========================================================= -->
+
+<section id="robustness" class="section">
+
+    <div class="container">
+
+        <div class="section-label">
+            ROBUSTNESS
+        </div>
+
+        <h2>
+            The gate adapts when a sensor becomes unreliable.
+        </h2>
+
+        <p class="section-intro">
+            Dynamic routing helps isolate corrupted modalities
+            instead of forcing noisy information into a static
+            multimodal fusion pipeline.
+        </p>
+
+
+        <div class="noise-grid">
+
+            <div class="noise-card">
+
+                <div class="noise-title">
+                    AUDIO CORRUPTION
+                </div>
+
+                <div class="noise-condition">
+                    SNR = -10 dB
+                </div>
+
+
+                <div class="noise-comparison">
+
+                    <div>
+
+                        <span>
+                            Cross-Attention
+                        </span>
+
+                        <strong class="bad">
+                            79.4%
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            DynaGate-Light
+                        </span>
+
+                        <strong class="good">
+                            85.5%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div class="improvement">
+                    +6.1 percentage points
+                </div>
+
+            </div>
+
+
+            <div class="noise-card">
+
+                <div class="noise-title">
+                    VIDEO CORRUPTION
+                </div>
+
+                <div class="noise-condition">
+                    σ = 0.20
+                </div>
+
+
+                <div class="noise-comparison">
+
+                    <div>
+
+                        <span>
+                            Cross-Attention
+                        </span>
+
+                        <strong class="bad">
+                            77.8%
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            DynaGate-Light
+                        </span>
+
+                        <strong class="good">
+                            82.6%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div class="improvement">
+                    +4.8 percentage points
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="robustness-flow">
+
+            <div class="rf-item">
+                Clean Audio
+            </div>
+
+            <div class="rf-arrow">
+                →
+            </div>
+
+            <div class="rf-item selected">
+                Audio Expert
+            </div>
+
+            <div class="rf-arrow">
+                →
+            </div>
+
+            <div class="rf-item">
+                Prediction
+            </div>
+
+        </div>
+
+
+        <div class="robustness-flow">
+
+            <div class="rf-item">
+                Noisy Audio
+            </div>
+
+            <div class="rf-arrow">
+                →
+            </div>
+
+            <div class="rf-item selected">
+                Video Expert
+            </div>
+
+            <div class="rf-arrow">
+                →
+            </div>
+
+            <div class="rf-item">
+                Prediction
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     DATASET / IMPLEMENTATION
+========================================================= -->
+
+<section class="section section-light">
+
+    <div class="container">
+
+        <div class="section-label">
+            EXPERIMENT
+        </div>
+
+        <h2>
+            AV-FFIA benchmark
+        </h2>
+
+
+        <div class="dataset-grid">
+
+            <div class="dataset-stat">
+                <strong>19,963</strong>
+                <span>audio-visual clips</span>
+            </div>
+
+            <div class="dataset-stat">
+                <strong>4</strong>
+                <span>feeding intensity classes</span>
+            </div>
+
+            <div class="dataset-stat">
+                <strong>14,363</strong>
+                <span>training clips</span>
+            </div>
+
+            <div class="dataset-stat">
+                <strong>2,800</strong>
+                <span>validation clips</span>
+            </div>
+
+            <div class="dataset-stat">
+                <strong>2,800</strong>
+                <span>test clips</span>
+            </div>
+
+        </div>
+
+
+        <div class="class-tags">
+
+            <span>None</span>
+            <span>Weak</span>
+            <span>Medium</span>
+            <span>Strong</span>
+
+        </div>
+
+
+        <div class="implementation-card">
+
+            <h3>
+                Implementation
+            </h3>
+
+            <div class="implementation-grid">
+
+                <div>
+                    <span>Framework</span>
+                    <strong>PyTorch</strong>
+                </div>
+
+                <div>
+                    <span>Optimizer</span>
+                    <strong>Adam</strong>
+                </div>
+
+                <div>
+                    <span>Audio</span>
+                    <strong>64 kHz</strong>
+                </div>
+
+                <div>
+                    <span>Video</span>
+                    <strong>20 frames</strong>
+                </div>
+
+                <div>
+                    <span>Temperature</span>
+                    <strong>τ = 1.0</strong>
+                </div>
+
+                <div>
+                    <span>Learning rate</span>
+                    <strong>1e-4</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CODE
+========================================================= -->
+
+<section class="section section-dark">
+
+    <div class="container narrow">
+
+        <div class="section-label">
+            CODE
+        </div>
+
+        <h2>
+            Built as a reproducible PyTorch research project.
+        </h2>
+
+        <p>
+            The repository contains the dataset loader, audio/video
+            backbones, dynamic gate, fusion modules, training
+            utilities, inference model, and regularization scheduler.
+        </p>
+
+
+        <div class="repo-paths">
+
+            <code>
+                models/backbones.py
+            </code>
+
+            <code>
+                models/gate.py
+            </code>
+
+            <code>
+                models/dynamic/ffia.py
+            </code>
+
+            <code>
+                models/fusions.py
+            </code>
+
+            <code>
+                models/inference/inference_model.py
+            </code>
+
+            <code>
+                utils/scheduler.py
+            </code>
+
+        </div>
+
+
+        <!-- IMPORTANT: replace this URL -->
+
+        <a
+            class="button button-light"
+            href="https://github.com/YOUR_USERNAME/YOUR_REPO"
+            target="_blank"
+        >
+            View GitHub Repository
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CITATION
+========================================================= -->
+
+<section id="citation" class="section">
+
+    <div class="container narrow">
+
+        <div class="section-label">
+            CITATION
+        </div>
+
+        <h2>
+            Cite this work
+        </h2>
+
+        <p>
+            Replace the placeholder bibliography below with the
+            final publication metadata once the paper is officially
+            published.
+        </p>
+
+
+        <div class="citation-box">
+
+<pre>
+@article{dynagateffia,
+  title={DynaGate-FFIA: Dynamic Audio-Visual
+         Routing for Efficient Fish Feeding Assessment},
+  author={YOUR AUTHORS},
+  journal={IEEE Transactions on Multimedia},
+  year={2026}
+}
+</pre>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <div class="container footer-inner">
+
+        <div>
+            <strong>
+                DynaGate-FFIA
+            </strong>
+
+            <span>
+                Dynamic Audio-Visual Routing for Efficient
+                Fish Feeding Assessment
+            </span>
+        </div>
+
+
+        <div>
+            <a href="#top">
+                Back to top ↑
+            </a>
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
