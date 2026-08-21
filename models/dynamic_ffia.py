@@ -15,9 +15,9 @@ FUSION_MAP = {
 
 FLOP_WEIGHTS = {
     None: torch.Tensor([0.5945, 22.5086]),                     # 2-branch
-    'cross_attn': torch.Tensor([0.5945, 22.5086, 23.1284]),
+    'cross_attn': torch.Tensor([0.5945, 22.5086, 23.2292]),
     'simple_cross': torch.Tensor([0.5945, 22.5086, 23.1063]),
-    'mbt': torch.Tensor([0.5945, 22.5086, 23.2292]),
+    'mbt': torch.Tensor([0.5945, 22.5086, 23.1284]),
     'self_attn': torch.Tensor([0.5945, 22.5086, 23.1126]),
 }
 
