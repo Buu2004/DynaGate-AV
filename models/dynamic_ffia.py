@@ -45,6 +45,8 @@ class DynamicFFIAModel(nn.Module):
             self.fusion_module = FUSION_MAP[fusion_type](embed_dim=512)
             self.head_fusion = nn.Linear(512, num_classes)
 
+        self.output_layer = nn.Linear(num_classes, num_classes)
+
         # Gate
         self.gate = LightweightCNN_Gate(num_experts=self.num_experts)
 
@@ -79,29 +81,31 @@ class DynamicFFIAModel(nn.Module):
         spec = self.audio_frontend(audio_raw)
         a_feat_high = self.audio_backbone(spec)
         a_feat = F.relu(self.project_a(a_feat_high))
-
+    
         v_feat_high = self.video_backbone(video_raw)
         v_feat = F.relu(self.project_v(v_feat_high))
-
+    
         pred_a = self.head_audio(a_feat.transpose(1, 2))
         pred_v = self.head_video(v_feat.transpose(1, 2))
-
+    
         if self.fusion_type is None:
             preds = torch.stack([pred_a, pred_v], dim=1)
         else:
             fused_rep = self.fusion_module(a_feat, v_feat)
             pred_f = self.head_fusion(fused_rep)
             preds = torch.stack([pred_a, pred_v, pred_f], dim=1)
-
+    
         gate_logits = self.gate(spec, video_raw)
         weights = DiffSoftmax(gate_logits, tau=self.tau, dim=1)
-
+    
         if self.store_weight:
             self.weight_list.append(weights.detach().cpu())
-
-        output = (weights.unsqueeze(2) * preds).sum(dim=1)
-
+    
+        h = (weights.unsqueeze(2) * preds).sum(dim=1)
+    
+        final_logits = self.output_layer(h)
+    
         if return_reg:
             probs = self.return_probs(weights)
-            return output, probs
-        return output
+            return final_logits, probs
+        return final_logits
