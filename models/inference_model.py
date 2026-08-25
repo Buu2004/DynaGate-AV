@@ -32,6 +32,8 @@ class DynamicFFIAModel(nn.Module):
         if fusion_type is not None:
             self.fusion_module = FUSION_MAP[fusion_type](embed_dim=512)   
             self.head_fusion = nn.Linear(512, num_classes)
+        
+        self.output_layer = nn.Linear(num_classes, num_classes)
 
         self.gate = LightweightCNN_Gate(num_experts=self.num_experts, feature_dim=128)
 
@@ -69,5 +71,6 @@ class DynamicFFIAModel(nn.Module):
                     sub_pred = self.head_fusion(fused)
 
                 preds[idx] = sub_pred
-
+            
+            preds = self.output_layer(preds)
             return preds, chosen
