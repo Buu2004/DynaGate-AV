@@ -165,7 +165,7 @@ If you use this code, please cite the paper once publication details are availab
 ```bibtex
 @article{nguyen2026dynagateffia,
   title   = {DynaGate-AV: Dynamic Expert Routing for Efficient and Robust Audio-Visual Fish Feeding Assessment},
-  author  = {Nguyen Duc, Minh and Ngo, Ba Hung and Do, Cuong D. and Nguyen, Van-Dinh},
+  author  = {Minh D. Nguyen, Ba Hung Ngo, Cuong D. Do, and Van-Dinh Nguyen},
   journal = {arXiv preprint},
   year    = {2026}
 }
