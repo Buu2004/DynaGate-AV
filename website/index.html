@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="DynaGate-FFIA: Dynamic Audio-Visual Routing for Efficient Fish Feeding Assessment">
-<title>DynaGate-FFIA</title>
+<meta name="description" content="DynaGate-AV: Dynamic Expert Routing for Efficient and Robust Audio-Visual Fish Feeding Assessment">
+<title>DynaGate-AV: Dynamic Expert Routing for Efficient and Robust Audio-Visual Fish Feeding Assessment</title>
 <link rel="stylesheet" href="style.css">
 
 <script>
@@ -23,7 +23,7 @@ window.MathJax={
 
 <nav class="navbar">
 <div class="container nav-inner">
-<a href="#top" class="nav-logo">DynaGate-FFIA</a>
+<a href="#top" class="nav-logo">DynaGate-AV</a>
 <div class="nav-links">
 <a href="#abstract">Abstract</a>
 <a href="#method">Method</a>
@@ -40,8 +40,8 @@ window.MathJax={
 <section class="hero">
 <div class="container">
 <div class="hero-badge">AUDIO-VISUAL · DYNAMIC ROUTING · AQUACULTURE</div>
-<h1>DynaGate-FFIA</h1>
-<p class="hero-title">Dynamic Audio-Visual Routing for Efficient Fish Feeding Assessment</p>
+<h1>DynaGate-AV</h1>
+<p class="hero-title">Dynamic Expert Routing for Efficient and Robust Audio-Visual Fish Feeding Assessment</p>
 
 <div class="authors">
 <div class="author-list">
@@ -82,7 +82,7 @@ A lightweight dynamic routing framework that adaptively selects audio, video, or
 <h1>Efficient fish feeding assessment for real-world aquaculture.</h1>
 
 <p>
-Audio-visual learning can improve fish feeding intensity assessment (FFIA) by exploiting complementary acoustic and visual cues. However, existing multimodal approaches typically process both modalities for every sample, resulting in fixed computational cost even when a single modality is sufficient, while degraded inputs can adversely affect static fusion. We propose DynaGate-FFIA, a dynamic expert-routing framework for sample-adaptive audio-visual computation.
+Audio-visual learning can improve fish feeding intensity assessment (FFIA) by exploiting complementary acoustic and visual cues. However, existing multimodal approaches typically process both modalities for every sample, resulting in fixed computational cost even when a single modality is sufficient, while degraded inputs can adversely affect static fusion. We propose DynaGate-AV, a dynamic expert-routing framework for sample-adaptive audio-visual computation.
 </p>
 
 <p>
@@ -142,8 +142,8 @@ Under modality-specific corruption, dynamic routing improves accuracy over stati
 <h1>Dynamic expert routing for efficient fish feeding assessment.</h1>
 
 <div class="architecture-figure">
-<img src="assets/pipeline.png" alt="DynaGate-FFIA architecture">
-<p class="figure-caption">Overall architecture of the proposed DynaGate-FFIA framework.</p>
+<img src="assets/pipeline.png" alt="DynaGate-AV architecture">
+<p class="figure-caption">Overall architecture of the proposed DynaGate-AV framework.</p>
 </div>
 </div>
 </section>
@@ -264,8 +264,8 @@ The progressive penalty encourages the gate to favor the lower-cost experts when
 </div>
 
 <div class="full-figure-card">
-<img src="assets/training_dynamics.png" alt="Training dynamics of DynaGate-FFIA under IncreaseRegOnPlateau">
-<p class="figure-caption">Training dynamics of the DynaGate-FFIA framework under the proposed <em>IncreaseRegOnPlateau</em> scheduler across two different initializations (\(\lambda_{\mathrm{init}}=10^{-4}\) and \(10^{-3}\)). The left column plots show the relationship between training/validation accuracy and validation FLOPs. The right column plots detail the gating behavior, showing how step-wise increases in \(\lambda\) directly force the routing mechanism to heavily favor the lightweight audio expert.</p>
+<img src="assets/training_dynamics.png" alt="Training dynamics of DynaGate-AV under IncreaseRegOnPlateau">
+<p class="figure-caption">Training dynamics of the DynaGate-AV framework under the proposed <em>IncreaseRegOnPlateau</em> scheduler across two different initializations (\(\lambda_{\mathrm{init}}=10^{-4}\) and \(10^{-3}\)). The left column plots show the relationship between training/validation accuracy and validation FLOPs. The right column plots detail the gating behavior, showing how step-wise increases in \(\lambda\) directly force the routing mechanism to heavily favor the lightweight audio expert.</p>
 </div>
 
 <div class="full-figure-card">
@@ -387,8 +387,8 @@ The progressive penalty encourages the gate to favor the lower-cost experts when
 <div class="section-label">CITATION</div>
 <h2>Cite this work</h2>
 <div class="citation-box">
-<pre>@article{dynagateffia,
-  title={DynaGate-FFIA: Dynamic Audio-Visual Routing for Efficient Fish Feeding Assessment},
+<pre>@article{dynagateav,
+  title={DynaGate-AV: Dynamic Expert Routing for Efficient and Robust Audio-Visual Fish Feeding Assessment},
   author={Minh D. Nguyen and Ba Hung Ngo and Cuong D. Do and Van-Dinh Nguyen},
   journal={arXiv preprint arXiv:XXXX.XXXXX},
   year={2026}
@@ -401,7 +401,7 @@ The progressive penalty encourages the gate to favor the lower-cost experts when
 
 <footer>
 <div class="container footer-inner">
-<div><strong>DynaGate-FFIA</strong><span>Dynamic Audio-Visual Routing for Efficient Fish Feeding Assessment</span></div>
+<div><strong>DynaGate-AV</strong><span>Dynamic Expert Routing for Efficient and Robust Audio-Visual Fish Feeding Assessment</span></div>
 <div><a href="#top">Back to top ↑</a></div>
 </div>
 </footer>
