@@ -26,7 +26,7 @@ Fish feeding intensity is classified into four levels: **None**, **Weak**, **Mid
 During training, all candidate experts are evaluated so that the routing policy can be optimized end-to-end with a straight-through estimator. During inference, only the selected branch runs.
 
 <p align="center">
-  <img src="website/assets/architecture.png" alt="DynaGate-FFIA architecture" width="850">
+  <img src="website/assets/pipeline.png" alt="DynaGate-FFIA architecture" width="850">
 </p>
 
 ## Results
