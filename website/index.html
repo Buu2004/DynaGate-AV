@@ -82,19 +82,20 @@ A lightweight dynamic routing framework that adaptively selects audio, video, or
 <h1>Efficient fish feeding assessment for real-world aquaculture.</h1>
 
 <p>
-Accurate fish feeding intensity assessment (FFIA) is important for optimizing feed use and monitoring feeding behavior in aquaculture. However, existing audio-visual methods create a fixed multimodal processing cost on every sample, which limits their use on resource-constrained edge devices. We propose DynaGate-FFIA, a dynamic expert-routing framework designed to reduce inference cost while improving accuracy and robustness.
+Audio-visual learning can improve fish feeding intensity assessment (FFIA) by exploiting complementary acoustic and visual cues. However, existing multimodal approaches typically process both modalities for every sample, resulting in fixed computational cost even when a single modality is sufficient, while degraded inputs can adversely affect static fusion. We propose DynaGate-FFIA, a dynamic expert-routing framework for sample-adaptive audio-visual computation.
 </p>
 
 <p>
-A lightweight CNN gate (approximately 0.2M parameters) processes compact audio spectrograms and temporally pooled video frames to select among audio-only, video-only, or audio-visual fusion experts. Routing is trained end-to-end using a straight-through estimator and a FLOPs-aware regularizer that explicitly penalizes expensive experts. We further introduce <em>IncreaseRegOnPlateau</em>, which increases the regularization coefficient when validation accuracy plateaus to automatically identify the balance between accuracy and computational cost.
+A lightweight convolutional neural network gate examines low-cost audio and visual representations before the main backbones and dynamically selects among modality-specific and audio-visual fusion experts. The routing policy is trained end-to-end using a FLOPs-aware objective, together with <em>IncreaseRegOnPlateau</em>, an adaptive regularization strategy that progressively encourages lower-cost routing as validation performance stabilizes.
 </p>
 
 <p>
-We evaluate two variants: DynaGate-Light (audio and video experts) and DynaGate-Full (additional fusion expert). On the AV-FFIA benchmark, <strong>DynaGate-Light achieves 96.4% test accuracy with only 5.29 GFLOPs</strong>, while DynaGate-Full achieves 96.5% with 5.67 GFLOPs. This is a <strong>4.1 percentage point gain</strong> over the strongest static fusion baseline (92.4%).
+Experiments on the AV-FFIA dataset show that <strong>DynaGate-Light achieves 96.4% accuracy with 5.29 GFLOPs</strong>, outperforming the strongest evaluated static fusion baseline by <strong>4.0 percentage points</strong> while reducing computation from 23.23 to 5.29 GFLOPs.
 </p>
 
 <p>
-Under audio and video corruption, the gate adaptively routes to the uncorrupted modality, improving robustness by <strong>6.1 points</strong> at an audio SNR of -10 dB and <strong>4.8 points</strong> at \(\sigma=0.2\) Gaussian video noise. These results indicate that dynamic routing can reduce inference cost while maintaining accuracy and improving robustness for FFIA. </p>
+Under modality-specific corruption, dynamic routing improves accuracy over static fusion by up to <strong>6.1</strong> and <strong>4.8 percentage points</strong> for audio and visual corruption, respectively. Routing analysis further reveals input-dependent modality specialization and adaptive shifts toward the less corrupted modality. These results show that dynamically allocating computation across modalities, rather than uniformly processing all available inputs, can jointly improve accuracy, efficiency, and robustness in audio-visual FFIA.
+</p>
 </div>
 </section>
 
@@ -269,12 +270,12 @@ The progressive penalty encourages the gate to favor the lower-cost experts when
 
 <div class="full-figure-card">
 <img src="assets/qualitative_routing.png" alt="Qualitative visualization of representative samples from the AV-FFIA test set">
-<p class="figure-caption">Qualitative visualization of representative samples from the AV-FFIA test set across the four feeding-intensity classes. For each sample, the audio spectrogram and its corresponding activation map are shown in the top row, while the video frame and its corresponding activation map are shown in the bottom row. A blue tick and a black cross indicate that the audio is selected, whereas a black tick and a blue cross indicate that the video is selected.</p>
+<p class="figure-caption">Qualitative visualization of representative samples from the AV-FFIA test set across the four feeding-intensity classes. For each sample, the audio spectrogram and its corresponding activation map are shown in the top row, while the video frame and its corresponding activation map are shown in the bottom row. A tick indicates a selected modality, while a cross indicates an unselected modality.</p>
 </div>
 
 <div class="full-figure-card">
 <img src="assets/qualitative_middle_weak.png" alt="Qualitative examples from the Middle and Weak classes">
-<p class="figure-caption">Qualitative examples from the Middle and Weak classes of the AV-FFIA test set. For each sample, the audio spectrogram and its corresponding Grad-CAM visualization are shown in the top row, while the video frame and its corresponding Grad-CAM visualization are shown in the bottom row. Although both modalities have clear discriminative patterns, the audio modality is selected for all shown samples. A blue tick denotes audio selection and a black cross indicates video is not selected.</p>
+<p class="figure-caption">Qualitative examples from the Middle and Weak classes of the AV-FFIA test set. For each sample, the audio spectrogram and its corresponding Grad-CAM visualization are shown in the top row, while the video frame and its corresponding Grad-CAM visualization are shown in the bottom row. Although both modalities have clear discriminative patterns, the audio modality is selected for all shown samples. A tick indicates a selected modality, while a cross indicates an unselected modality.</p>
 </div>
 
 <div class="efficiency-card">
