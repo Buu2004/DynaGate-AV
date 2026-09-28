@@ -41,9 +41,32 @@ Results below are reported on the AV-FFIA test split from the accompanying paper
 | MBT | Static fusion | 74.0 | 23.13 | Fusion: 100.0 |
 | Cross-Attention | Static fusion | 92.4 | 23.23 | Fusion: 100.0 |
 | **DynaGate-Light** | Audio + Video | **96.4** | **5.29** | Audio: 79.1, Video: 20.9 |
-| **DynaGate-Full** | Audio + Video + Cross-Attention | **96.5** | **5.67** | Audio: 77.5, Video: 20.4, Fusion: 2.1 |
+| **DynaGate-Full** | Audio + Video + Cross-Attention | **96.5** | **5.64** | Audio: 77.6, Video: 20.3, Fusion: 2.1 |
 
 Under severe corruption, DynaGate-Light achieves 85.5% accuracy with audio noise at -10 dB SNR (+6.1 points over Cross-Attention) and 82.6% with Gaussian video noise at sigma = 0.2 (+4.8 points).
+
+## Repository structure
+
+```text
+.
+├── config.py                         # Experiment and data configuration
+├── data/
+│   └── dataset.py                    # AV-FFIA loading and split construction
+├── models/
+│   ├── dynamic_ffia.py               # Training-time dynamic-routing model
+│   ├── inference_model.py             # Conditional-execution inference model
+│   ├── backbones.py                   # Audio and video encoders
+│   ├── fusions.py                     # Fusion experts
+│   └── gate.py                        # CNN, MLP, and Transformer gates
+├── scripts/
+│   ├── train.py                       # Standard training
+│   ├── train_with_reg_scheduler.py    # Adaptive-regularization training
+│   └── inference.py                   # One-switch inference and analysis
+├── utils/
+│   ├── trainer.py                     # Training and evaluation loops
+│   └── scheduler.py                   # IncreaseRegOnPlateau
+└── website/                           # Project page assets
+```
 
 ## Installation
 
@@ -134,29 +157,6 @@ python -m scripts.inference \
 ```
 
 Inference reports accuracy and throughput. It also saves confusion matrices and overall expert usage figures in the current working directory.
-
-## Repository structure
-
-```text
-.
-├── config.py                         # Experiment and data configuration
-├── data/
-│   └── dataset.py                    # AV-FFIA loading and split construction
-├── models/
-│   ├── dynamic_ffia.py               # Training-time dynamic-routing model
-│   ├── inference_model.py             # Conditional-execution inference model
-│   ├── backbones.py                   # Audio and video encoders
-│   ├── fusions.py                     # Fusion experts
-│   └── gate.py                        # CNN, MLP, and Transformer gates
-├── scripts/
-│   ├── train.py                       # Standard training
-│   ├── train_with_reg_scheduler.py    # Adaptive-regularization training
-│   └── inference.py                   # One-switch inference and analysis
-├── utils/
-│   ├── trainer.py                     # Training and evaluation loops
-│   └── scheduler.py                   # IncreaseRegOnPlateau
-└── website/                           # Project page assets
-```
 
 ## Citation
 
