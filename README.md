@@ -1,9 +1,9 @@
-# DynaGate-FFIA: Dynamic Audio-Visual Routing for Efficient Fish Feeding Assessment
+# DynaGate-AV: Dynamic Expert Routing for Efficient and Robust Audio-Visual Fish Feeding Assessment
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-%3E%3D2.0-ee4c2c.svg)](https://pytorch.org/)
 
-Official PyTorch implementation of **DynaGate-FFIA**, a dynamic expert-routing framework for fish feeding intensity assessment (FFIA). Instead of executing a fixed audio-visual multimodal fusion pipeline for every input sample, DynaGate-FFIA uses a lightweight CNN gate to select the most suitable expert for each synchronized audio-video clip. This enables efficient conditional inference and improves robustness when one modality is corrupted.
+Official PyTorch implementation of **DynaGate-AV**, a dynamic expert-routing framework for fish feeding intensity assessment (FFIA). Instead of executing a fixed audio-visual multimodal fusion pipeline for every input sample, DynaGate-AV uses a lightweight CNN gate to select the most suitable expert for each synchronized audio-video clip. This enables efficient conditional inference and improves robustness when one modality is corrupted.
 
 
 ## Highlights
@@ -26,7 +26,7 @@ Fish feeding intensity is classified into four levels: **None**, **Weak**, **Mid
 During training, all candidate experts are evaluated so that the routing policy can be optimized end-to-end with a straight-through estimator. During inference, only the selected branch runs.
 
 <p align="center">
-  <img src="website/assets/pipeline.png" alt="DynaGate-FFIA architecture" width="850">
+  <img src="website/assets/pipeline.png" alt="DynaGate-AV architecture" width="850">
 </p>
 
 ## Results
@@ -164,7 +164,8 @@ If you use this code, please cite the paper once publication details are availab
 
 ```bibtex
 @article{nguyen2026dynagateffia,
-  title   = {DynaGate-FFIA: Dynamic Audio-Visual Routing for Efficient Fish Feeding Assessment},
+  title   = {DynaGate-AV: Dynamic Expert Routing for Efficient and Robust
+Audio-Visual Fish Feeding Assessment},
   author  = {Nguyen Duc, Minh and Ngo, Ba Hung and Do, Cuong D. and Nguyen, Van-Dinh},
   journal = {arXiv preprint},
   year    = {2026}
