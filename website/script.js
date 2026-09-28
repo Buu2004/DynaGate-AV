@@ -1,16 +1,16 @@
 const carouselData={
 audio:{
 conditions:["SNR = -10 dB","SNR = 0 dB","SNR = 10 dB"],
-baseline:["79.4%","84.0%","88.0%"],
-dynagate:["85.5%","88.0%","91.5%"],
+baseline:["79.4%","86.1%","88.2%"],
+dynagate:["85.5%","90.1%","91.7%"],
 improvement:["+6.1 percentage points","+4.0 percentage points","+3.5 percentage points"],
 confusion:["assets/audio_noise_1.png","assets/audio_noise_2.png","assets/audio_noise_3.png"],
 routing:["assets/audio_routing_1.png","assets/audio_routing_2.png","assets/audio_routing_3.png"]
 },
 video:{
 conditions:["σ = 0.10","σ = 0.15","σ = 0.20"],
-baseline:["89.9%","84.1%","77.8%"],
-dynagate:["92.0%","88.2%","82.6%"],
+baseline:["89.9%","85.3%","77.8%"],
+dynagate:["92.0%","89.4%","82.6%"],
 improvement:["+2.1 percentage points","+4.1 percentage points","+4.8 percentage points"],
 confusion:["assets/video_noise_1.png","assets/video_noise_2.png","assets/video_noise_3.png"],
 routing:["assets/video_routing_1.png","assets/video_routing_2.png","assets/video_routing_3.png"]
